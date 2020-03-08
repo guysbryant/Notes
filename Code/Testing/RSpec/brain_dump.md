@@ -33,6 +33,8 @@ tags:
   - [Test Speed](#test-speed)
   - [Spring Preloader](#spring-preloader)
     - [How to use](#how-to-use)
+      - [Setup Spring for tests](#setup-spring-for-tests)
+- [Iffy RSpec Conveniences](#iffy-rspec-conveniences)
 
 # Terms, Keywords, Jargon, and Phrases
 
@@ -474,3 +476,41 @@ What slows down a test suite?
   - -in the terminal will tell you if its running or not
 - `spring server`
   - to start
+- `spring binstub --all`
+  - list everything Spring is set up to preload
+  - by default this is probably just `rake` and `rails`
+
+#### Setup Spring for tests
+
+1. Add `gem 'spring-commands-rspec', group :development`
+2. `bundle install`
+3. `bundle exec spring binstub rspec`
+
+- This creates something called binstub
+  - wrapper for executables
+    - Ensures that they are used in the right environment
+    - example executables
+      - `rails`
+      - `rake`
+      - `bundle`
+      - `rspec`
+  - now when we use `rspec` it will use Spring
+
+4. `spring stop`
+5. `spring server`
+6. New commands:
+
+- `spring rspec spec`
+- `spring rake`
+- `spring rails g ...`
+- `spring rake db:migrate`
+- `spring etc`
+
+# Iffy RSpec Conveniences
+
+- let
+  - can lead to future confusion when reading tests
+    - you need to hunt dow the let references
+  - considered a 'semi' global variable
+  - hides details
+  - can lead to brittle tests

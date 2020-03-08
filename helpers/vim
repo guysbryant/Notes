@@ -1,0 +1,7 @@
+Search and replace:
+:%s/search/replace/g
+    g means global, as in every occurance throught the entire document
+    
+:%s+-+*+
+    This will find all - and replace them with *
+        Necessary because otherwise VIM reads those as regex or something

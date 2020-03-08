@@ -22,5 +22,5 @@ hrm() {
 }
 
 hls() {
-	ls -1 ~/.about/
+    ls -1 ~/Documents/Notes/helpers/"$1"
 }

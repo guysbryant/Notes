@@ -1,0 +1,4 @@
+https://hub.github.com/
+hub clone [repo] : clone your own repo
+hub clone [user]/[repo] : clone someone else's repo
+hub create -d ["repo name"] : create repo on github, leave name blank to use current directory as name

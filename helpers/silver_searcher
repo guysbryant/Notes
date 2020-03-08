@@ -1,0 +1,8 @@
+https://github.com/ggreer/the_silver_searcher
+Like ack but faster and can be told to use .gitignore and .hgignore ontop of .ignore
+	- This makes finding your files faster because it doesn't seach EVERYTHING
+	- Suggested to add *.min.js to .ignore
+Usage:
+	ag todo
+Result:
+	Find every file that contains the word todo

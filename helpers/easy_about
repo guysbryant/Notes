@@ -1,0 +1,26 @@
+#Created by Joel Taddei
+h() {
+    if [ "$1" != "" ]
+    then
+        less ~/Documents/Notes/helpers/"$1"
+    fi
+}
+
+#My additions
+hvim() {
+    if [ "$1" != "" ]
+    then
+        vim ~/Documents/Notes/helpers/"$1"
+    fi
+}
+
+hrm() {
+    if [ "$1" != "" ]
+    then
+        rm ~/Documents/Notes/helpers/"$1"
+    fi
+}
+
+hls() {
+	ls -1 ~/.about/
+}

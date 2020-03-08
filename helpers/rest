@@ -1,0 +1,13 @@
+Examples using a Chair model
+
+HTTP Method  |     Route         |  Controller#Action  |  Render/Redirect  |      Result           |  SQL Statement      |            SQL
+  get        | /chairs           |       index         |    render         |   index template      |      SELECT         |   SELECT chair.* FROM chairs;
+  post       | /chairs           |       create        |    redirect       |   new chair path      |      INSERT         |   INSERT INTO chairs (attribute, attribute, etc) values (?, ?, etc);
+  get        | /chairs/new       |       new           |    render         |   create/update form  |      SELECT         |   SELECT chairs.* FROM chairs
+  get        | /chairs/:id/edit  |       edit          |    render         |   create/update form  |      SELECT         |   SELECT chairs.* FROM chairs
+  get        | /chairs/:id       |       show          |    render         |   show template       |      SELECT         |   SELECT chairs.* FROM chairs WHERE id = ?; or WHERE type = ? or however you are finding_by
+  patch      | /chairs/:id       |       update        |    redirect       |   show chair path     |      UPDATE         |   UPDATE chairs SET id = ?, type = ?, color = ? WHERE id =?;
+  delete     | /chairs/:id       |       delete        |    redirect       |   all chairs path     |      DELETE         |   DELETE FROM charis WHERE id = ?; 
+
+In all SELECT statements you can limit the results by specifying what should be returned rather than chairs.*
+SELECT chairs.type, chairs.color FROM chairs;

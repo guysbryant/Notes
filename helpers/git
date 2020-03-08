@@ -1,0 +1,16 @@
+ALL COMMANDS REQUIRE git AS THE FIRST PART OF THE COMMAND
+
+branch [branch name] : create branch
+branch -a : list all branches, remote and local
+branch -d : delete localbranch, check for merge status and warn if not merged
+branch -D : delete with no merge check and no confirmation
+branch push origin --delete [branch name] : delete remote branch
+checkout [branch name]
+checkout -b [branch name] : create and checkout branch
+push -u origin [branch name] : create remote branch 
+git reset HEAD~1 : go back one commit
+git reset 'HEAD@{X} : use git reflog to find the HEAD postion you want to go back to
+	replace X with the number you want
+	This is how you can undo a git reset
+create [repo name] : create a repo on github, uses hub alias
+	- see .about/hub for more info

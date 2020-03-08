@@ -1,0 +1,4 @@
+Integrated Terminal
+	If not rendering properly then you are probably using the dom option
+	Search the JSON settings for dom and comment out this line if it's there:
+	 "terminal.integrated.rendererType": "dom",

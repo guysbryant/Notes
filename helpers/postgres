@@ -1,0 +1,10 @@
+SETUP:
+  Rails:
+    rails new myapp --database=postgresql
+      This creates the app and prepares it for postgres.
+      /config/database.yml is where you can modify DB setup
+	When this file is setup to your liking (defaults work and will setup a DB called myapp_development/test/etc)
+	  run:
+	    rake db:setup or rails db:setup
+	      This creates the databases, sets the users according to the .yml file, and creates the schema_migrations tables which 
+	      records your migrations to schemas and data.

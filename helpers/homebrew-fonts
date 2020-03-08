@@ -1,0 +1,20 @@
+Don't use caskroom/fonts anymore
+The correct way is:
+brew tap homebrew/cask-fonts
+brew cask install ________
+
+
+---------------------------------
+Fira Code Install
+Copy and paste the following into your terminal: 
+
+brew tap homebrew/cask-fonts
+brew cask install \
+  font-fira-code \
+  font-fira-mono \
+  font-fira-mono-for-powerline \
+  font-fira-sans
+
+then go to VS Code settings and for text font family just type in Fira Code and check enable ligatures
+https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions
+---------------------------------

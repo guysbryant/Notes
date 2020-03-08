@@ -1,0 +1,3 @@
+To bundle with an older version of bundler
+gem install bundler:version
+bundle _version_ install

@@ -1,0 +1,37 @@
+Video walkthrough:
+https://www.youtube.com/watch?v=DOqdWSuuxCQ
+
+Plugin list:
+https://asdf-vm.com/#/plugins-all
+
+Website:
+https://asdf-vm.com/
+
+Commands with examples and explanations
+All commands start with asdf
+	plugin-add <plugin>
+		-ex: plugin-add golang
+		-Adds the plugin to the list asdf tracks for you
+	plugin-remove <plugin>
+		-ex: plugin-remove golang
+		-Removes the plugin from the list asdf tracks for you
+	list-all <plugin>
+		-ex: list-all golang
+		-Shows all versions of plugin you can install
+	list <plugin>
+		-ex: list goloang
+		-Sows all versions of plugin you have installed
+	install <plugin> <version>
+		-ex: install golonag 1.12.6
+		-Installs plugin version
+	install
+		-ex: install
+		-Install every plugin version listed in .tool-versions
+	global <plugin> <version>
+		-ex: global golang 1.12.6
+		-Sets the plugin version as global for current user
+			Adds the plugin version to the global .tool-versions file located at ~/.tool-versions
+	local <plugin> <version>
+		-ex: local golang 1.5.4
+		-Sets the plugin version for the current project
+			Adds the plugin version to the local .tool-versions file

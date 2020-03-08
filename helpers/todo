@@ -1,0 +1,14 @@
+https://github.com/fabiospampinato/vscode-todo-plus
+https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus
+ALL COMMANDS ARE TOGGLES
+CMD+ENTER || ALT+ENTER : Box
+ALT+D : Done
+ALT+C : Cancel
+ALT+S : Start
+CMD+SHIFT+A : Archive
+
+TAGS
+@ : Brings up autocomplete for high, low, etc
+
+todo : list out all embedded todo, bugfix, optimize, etc
+	- uses silver searcher alias, ~/.howto/silver_searcher for more info

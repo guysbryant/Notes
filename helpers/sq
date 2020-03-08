@@ -1,0 +1,52 @@
+sqlite3 database_name.db //Create or enter a database of the chosen name
+CREATE TABLE cats (id INTEGER PRIMARY KEY, name TEXT, age INTEGER); //Create the table
+ALTER TABLE cats ADD COLUMN breed TEXT; //Add a new column to the table
+DROP TABLE cats; //Delete the entire table
+INSERT INTO cats (name, age, breed) VALUES ("Lightning", 5, "Tabby") //Add data to the table
+						Use NULL when you don't have a value for a given column yet
+
+
+--------SELECT STATEMENTS-----------
+SELECT [names of columns we are going to select] FROM [table we are selecting from];
+SELECT id, name, age, breed FROM cats; 	//You can specify each column you want in the result
+SELECT * FROM cats 			//This will return every column in the result
+SELECT DISTINCT name FROM cats; 	//Return only unique values of the chosen column
+SELECT * FROM cats WHERE name = "Maru"; //Return only rows that match the WHERE clause
+		WHERE  can use =, <, and > for
+
+      ---------Organizing SELECT Results----
+	SELECT columnt_name FROM table_name ORDER BY column_name ASC|DESC; //ASC is default and doesn't need to be specified
+	SELECT * FROM cats ORDER BY age; //Return all columns from cats table, sorted by age;
+	SELECT * FROM cats ORDER BY age DESC LIMIT 1; //Reverse order results by age and limit the results to just the first one
+	SELECT * FROM cats WHERE age BETWEEN 1 AND 3; //Return only the results that match the between and conditions
+
+--------Aggregate Functions---------
+     ----------COUNT----------------
+	SELECT COUNT([column_name]) FROM [table name] WHERE [column name] = [value]
+	SELECT COUNT(owner_id) FROM cats WHERE owner_id = 1; //In the cats table created above this returns 2
+			COUNT() returns the number or rows that meet a certain criteria
+			COUNT(*) counts everything
+     -------SUM()-AVG()-MIN()-MAX()-
+	SELECT SUM(column_name) FROM table_name; //Replace SUM() with needed aggregator
+     ----------GROUP BY------------
+	SELECT [column name], COUNT([column name]) FROM [table name] GROUP BY [column name];
+	SELECT breed, COUNT(breed) FROM cats GROUP BY breed; //Return the listed column with the values grouped and counted
+     ----------ALIASING With AS----
+	SELECT AVG(net_worth) AS average_net_worth FROM cats; //Renames the result column name to the alias name
+
+--------UPDATING DATA----------------
+UPDATE [table name] SET [column name] = [new value] WHERE [column name] = [current value]
+UPDATE cats SET anem = "Hana" WHERE name = "Hannah"; 
+
+--------DELETING DATA-----------------
+DELETE FROM [table name] WHERE [column name] = [value];
+DELETE FROM cats WHERE id = 2;
+
+--------COMMON PROMPT COMMANDS--------
+.tables to view all tables in the database
+.schema to view the database (tables w/ columns and their data types)
+.headers on //Display column names
+.mode column //Lets us adjust width in the terminal output
+.width auto //Auto adjust and normalize column width
+.width NUM1, NUM2 //Set a custom column width
+

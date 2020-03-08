@@ -1,0 +1,8 @@
+
+Class Methods that interact with the database to limit/refine the results.
+Can be defined with def self.method or scope :method.
+
+-------------Examples-----------------------
+scope :order_alpha_reverse, -> { order(title: :desc)}
+scope :longest_two_races, -> { order(distance: :desc).limit(2)}
+scope :distance_search, -> (search_distance){ where("distance > ?", search_distance)}

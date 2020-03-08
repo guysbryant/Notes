@@ -1,0 +1,10 @@
+To transpile to es6:
+    1) Create a .babelrc file in the project file structure somewhere
+    2) It should contain the following:
+        {
+            "presets": [
+                "es2015"
+            ],
+            "plugins": []
+        }
+    3) run babel (fileName.js) -o (newFileName.js)

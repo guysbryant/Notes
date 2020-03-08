@@ -1,0 +1,13 @@
+https://www.digitalocean.com/community/tutorials/installing-and-using-ranger-a-terminal-file-manager-on-a-ubuntu-vps
+zh : show hidden files, dot files are hidden
+q : quit ranger
+a : rename
+
+Official User Guide:
+https://github.com/ranger/ranger/wiki/Official-user-guide
+
+FAQ:
+https://github.com/ranger/ranger/wiki/FAQ%3A-Frequently-Asked-Questions
+
+wiki: 
+https://github.com/ranger/ranger/wiki

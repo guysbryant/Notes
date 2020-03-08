@@ -1,0 +1,30 @@
+THE BASICS
+Default Hot Keys
+Hold FN + listed keys to activate
+
+LED Keys
+Fn + A: LED Pattern Select Previous
+Fn + D: LED Pattern Select Next
+Fn + W: LED Brightness Increase
+Fn + S: LED Brightness Decrease
+Fn + Q: LED Scrolling Pattern Speed Decrease
+Fn + E: LED Scrolling Pattern Speed Increase
+Fn + Tab: LED Toggle Breathe Effect
+Fn + Caps Lock: LED Toggle Scrolling Pattern Direction
+Fn + X: LED Toggle On/Off
+Fn + Z: LED Toggle Mode (Keys+Edge, Keys Only, Edge Only, Only modifiers)
+
+Media Keys
+Fn + Page Up: Volume Up
+Fn + Page Down: Volume Down
+Fn + Print: Mute
+Fn + Insert: Play/Pause
+Fn + Home: Stop
+Fn + Delete: Previous
+Fn + End: Next
+
+Keyboard Option Keys
+Fn + N: Toggle keyboard 6KRO/NKRO (Default state 6KRO)
+
+See my github repo for how to change layout:
+https://github.com/guysbryant/massDropCtrl

@@ -514,3 +514,10 @@ What slows down a test suite?
   - considered a 'semi' global variable
   - hides details
   - can lead to brittle tests
+  - full tests require many variations, states, and scenarios
+    - hard to name all the let statements
+  - **Solution**
+    - local variables for each test
+- before, after
+  - save these for special occasions
+    - cleaning up data

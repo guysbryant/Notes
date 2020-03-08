@@ -127,10 +127,10 @@ Four ways to run tests:
 
 ## Organizing Tests
 
--	Create a context for each meaningful input and wrap it into a describe block
--	Example:
+* Create a context for each meaningful input and wrap it into a describe block
+* Example:
 
-```
+```ruby
   describe "Stories" do
     describe "GET stories#index" do
       context "when the user is an admin" do
@@ -165,22 +165,29 @@ Four ways to run tests:
 ```
 
 # How to get your data ready?
+
 ## Use Factories
 
 FactoryGirl
+
 Create – Create and persist object to the database with all its associations.
-	Triggers model and database validations
+
+* Triggers model and database validations
+
 Build – Will not persist the object but will still make requests to the database if the factory has associations.
-	Triggers validations only for associated objects
+
+* Triggers validations only for associated objects
+
 Build_stubbed – Does not call the database at all.
-	Creates and assigns attributes to an object to make it behave like an instantiated object.
-	Provides a fake id and create_at.
-	Associations, if any, will be created via build_stubbed too.
-	Does not trigger any validations.
+
+* Creates and assigns attributes to an object to make it behave like an instantiated object.
+* Provides a fake id and create_at.
+* Associations, if any, will be created via build_stubbed too.
+* Does not trigger any validations.
 
 Examples:
 
-```
+```ruby
   FactoryBot.define do
     factory :profile do
       user
@@ -195,25 +202,27 @@ Examples:
   end
 ```
 
-
 Four Phases of a Test
-Setup
-*	Prepare scenario
-*	Just get the minimum amount of data needed
-agent = Agent.create(name: 'James Bond')
-mission = Mission.create(name: 'Moonraker', status: 'Briefed')
 
-Exercise
-*	Runs the tests in the spec
-status = mission.agent_status
-Verification
-*	Test the system against your own expectations
-expect(status).not_to eq 'MIA')
-Teardown
-*	Resets the memory and database
-*	This is automated
+1. Setup
+    * Prepare scenario
+        * Just get the minimum amount of data needed
+            * agent = Agent.create(name: 'James Bond')
+            * mission = Mission.create(name: 'Moonraker', status: 'Briefed')
 
-```
+2. Exercise
+    *	Runs the tests in the spec
+    * status = mission.agent_status
+
+3. Verification
+    * Test the system against your own expectations
+    * expect(status).not_to eq 'MIA')
+
+4. Teardown
+    * Resets the memory and database
+    * This is automated
+
+```ruby
   describe Agent, '#favorite_gadget' do
 
     it 'returns one item, the favorite gadget of the agent ' do
@@ -235,58 +244,79 @@ Teardown
 ```
 
 # Test Basics
+
 ## Matchers
-*	Tests for equivalence
-*	.to eq
-*	.not_to eq
-*	Boolean
-*	.to be_truthy
-*	Any expression which is true
-*	.to be true
-*	Only true
-*	.to be_falsy
-*	Any expression which is false
-*	Includes nil
-*	.to be false
-*	Only false
-*	Regex
-*	.to match()
-*	Comparison
-*	.to be
-*	<
-*	>
-*	<=
-*	>=
-*	Test for classes and types
-*	.to be_an_instance_of
-*	.to be_a
-*	.to be_an
-*	Errors
-*	.to raise_error
-*	Any error
-*	.to raise_error(ErrorClass, “Some error message”)
-*	Specify both the error class and message
-*	.to raise_error(“Some error message”)
-*	Specify just the message
-*	Collection contents
-*	.to start_with
-*	Check first element in collection
-*	.to end_with
-*	Check last element in collection
-*	.to include
-*	Look for element in collection
-*	Predicate Matchers
-*	Rspec can dynamically create matchers for you.
-*	Works with predicate methods in your models
-*	They end with a question mark
-*	Use the method name without the question mark in the test
-*	Example
-*	Method
-```
-def bond?
+
+### Tests for equivalence
+
+* .to eq
+* .not_to eq
+
+### Boolean
+
+* .to be_truthy
+  * Any expression which is true
+* .to be true
+  * Only true
+* .to be_falsy
+  * Any expression which is false
+  * nil is counted as false
+* .to be false
+  * Only false
+
+### Regex
+
+* .to match()
+
+###  Comparison
+
+* .to be
+* <
+* >
+* <=
+* >=
+
+### Test for classes and types
+
+* .to be_an_instance_of
+* .to be_a
+* .to be_an
+
+### Errors
+
+* .to raise_error
+  * Any error
+* .to raise_error(ErrorClass, “Some error message”)
+  * Specify both the error class and message
+* .to raise_error(“Some error message”)
+  * Specify just the message
+
+### Collection contents
+
+* .to start_with
+  * Check first element in collection
+* .to end_with
+  * Check last element in collection
+* .to include
+  * Look for element in collection
+
+### Predicate Matchers
+
+* Rspec can dynamically create matchers for you.
+  * Works with predicate methods in your models
+    * They end with a question mark
+    * Use the method name without the question mark in the test
+    * Example
+
+```ruby
+#Method is called bond?
+def bond?()
     self.name == “Bond”
 end
-*	Test
+```
+
+```ruby
+#Tests use the method name without the ? with each of the equivalence matchers, .to, and .not_to
 it ‘is James Bond’ do
     agent = Agent.create(name: ‘James Bond’)
     expect(agent).to be_bond
@@ -296,33 +326,37 @@ it ‘isn’t James Bond’ do
     expect(agent).not_to be_bond
 end
 ```
-•	See how the method is bond? And tests use .not_/to be_bond
 
 ## let && let!
+
 Helper methods, not variables
-*	Let is lazily evaluated
-*	Only evaluated when a spec uses it
-*	Let! Is run regardless of being used by a spec or not
-*	Time-consuming
-*	Costly if over used
-*	Sets up data for each test
-*	Both version are memorized
-*	Cached with the same scope
-*	Usage examples
-```
+
+* let is lazily evaluated
+  * Only evaluated when a spec uses it
+* let! Is run regardless of being used by a spec or not
+  * Time-consuming
+  * Costly if over used
+  * Sets up data for each test
+* Both version are memoized
+* Cached with the same scope
+* Usage examples
+
+```ruby
 Describe Mission, ‘#prepare’, :let do
-	let(:mission) {Mission.create(name: ‘Moonraker’)}
-	let(:bond) {Agent.create(name: ‘James Bond’)}
-	it ‘adds agetns to a mission’ do
-		mission.prepare(bond)
-		expect(mission.agents).to include bond
-	end
+  let(:mission) {Mission.create(name: ‘Moonraker’)}
+  let(:bond) {Agent.create(name: ‘James Bond’)}
+  it ‘adds agents to a mission’ do
+    mission.prepare(bond)
+    expect(mission.agents).to include bond
+  end
 end
 ```
 
 ## Subjects
+
 Use in place of a let
-```
+
+```ruby
 describe Agent, '#status' do
   subject { Agent.create(name: 'Bond')  }
 
@@ -331,62 +365,77 @@ describe Agent, '#status' do
   end
 end
 ```
-Reduces code duplication but can lead to ambiguity.
+
+* Reduces code duplication but can lead to ambiguity.
 
 ## Callbacks
+
 Hooks that should run before or after each test in the spec file or around each test.
-*	before(:each)
-*	Run before each test
-*	Can be used to setup a fresh variable for each test
-*	before(:all)
-*	Run once before all the tests run
-*	Less time to run
-*	after(:each) and after(:all)
-*	Just like their before counterparts but after
+
+* before(:each)
+* Run before each test
+* Can be used to setup a fresh variable for each test
+* before(:all)
+* Run once before all the tests run
+* Less time to run
+* after(:each) and after(:all)
+* Just like their before counterparts but after
 
 ## Generators
-*	`rails g rspec:install`
-*	Setup rspec
-*	`rails g rspec:model some_model`
-*	Creates a spec for some_model
-*	`rails g rspec:controller some_controller`
-*	Creates a spec for some_controller
-*	Same for views but we don’t use Rspec for views`
-*	`rails g rspec:helper some_helper`
-*	Creates a spec for some_helper
-*	This is where you put tests for view helpers
-*	Need to run helper methods on a helper object to work.
-```
+
+* `rails g rspec:install`
+* Setup rspec
+* `rails g rspec:model some_model`
+* Creates a spec for some_model
+* `rails g rspec:controller some_controller`
+* Creates a spec for some_controller
+* Same for views but we don’t use Rspec for views`
+* `rails g rspec:helper some_helper`
+* Creates a spec for some_helper
+* This is where you put tests for view helpers
+* Need to run helper methods on a helper object to work.
+
+```ruby
 describe '#set_date' do
   helper.set_date
 end
 ```
-*	Also :mailer, :feature, :integration
-*	All of these add the require ‘rails_helper’ to the top of the test file
-*	And set the Rspec.describe to the appropriate type for the tests
-*	Type :controller, :helper etc..
-Tags
-*	Create custom tags for tests
-*	These can be applied to any tests
-*	Even across multiple types and folders
-*	Run all tests associated with a specific tag:
-*	`rspec –tag <tagname>`
-*	Run all tests except for those associated with a specific tag:
-*	`rspec –tag ~<tagname>`
-*	Run/Ignore multiple tags at once
-*	`rspec –tag <tagname> --tag <tagname>`
-*	`rspec –tag ~<tagname> --tag <tagname>`
+
+* Also :mailer, :feature, :integration
+  * These are beyond the scope of the current material
+* All of these add the require ‘rails_helper’ to the top of the test file
+* And set the Rspec.describe to the appropriate type for the tests
+  * Type :controller, :helper etc..
+
+## Tags
+
+* Create custom tags for tests
+  * These can be applied to any tests
+    * Even across multiple types and folders
+  * Run all tests associated with a specific tag:
+    * `rspec –tag <tagname>`
+  * Run all tests except for those associated with a specific tag:
+    * `rspec –tag ~<tagname>`
+  * Run/Ignore multiple tags at once
+    * `rspec –tag <tagname> --tag <tagname>`
+    * `rspec –tag ~<tagname> --tag <tagname>`
 
 ## Test Speed
+
 Its important to have a fast test suite so that you are more likely to keep running tests to get their feedback.
 What slows down a test suite?
-Database calls
-	Faking the data and only using the faked data helps with this
-		Fake as much as possible!
+
+* Database calls
+  * Faking the data and only using the faked data helps with this
+  * Fake as much as possible!
 
 ## Spring Preloader
-*	Comes default with Rails since version 4.1
-*	How to use
-*	spring status
-*	in the terminal will tell you if its running or not
-*	spring server to start
+
+* Comes default with Rails since version 4.1
+
+### How to use
+
+* `spring status`
+  * -in the terminal will tell you if its running or not
+* `spring server`
+  * to start

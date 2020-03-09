@@ -35,6 +35,20 @@ tags:
     - [How to use](#how-to-use)
       - [Setup Spring for tests](#setup-spring-for-tests)
 - [Iffy RSpec Conveniences](#iffy-rspec-conveniences)
+- [Front end testing with phantom.js, capybara, and poltergeist](#front-end-testing-with-phantomjs-capybara-and-poltergeist)
+  - [Notes about capybara](#notes-about-capybara)
+  - [Gems](#gems-1)
+  - [How to](#how-to)
+- [Feature Tests](#feature-tests)
+  - [Use Stories](#use-stories)
+    - [Detailed example from ruby monstas](#detailed-example-from-ruby-monstas)
+- [Test doubles](#test-doubles)
+  - [Stubs](#stubs)
+  - [Mocks](#mocks)
+  - [Spies](#spies)
+  - [Summary:](#summary)
+  - [Double Objects](#double-objects)
+  - [When to use doubles?](#when-to-use-doubles)
 
 # Terms, Keywords, Jargon, and Phrases
 
@@ -353,7 +367,7 @@ end
 ```
 
 ```ruby
-#Tests use the method name without the ? with each of the equivalence matchers, .to, and .not_to
+#Tests use the method name, prepending be_, and drops the ?, with each of the equivalence matchers, .to, and .not_to
 it ‘is James Bond’ do
     agent = Agent.create(name: ‘James Bond’)
     expect(agent).to be_bond
@@ -410,13 +424,13 @@ end
 Hooks that should run before or after each test in the spec file or around each test.
 
 - before(:each)
-- Run before each test
-- Can be used to setup a fresh variable for each test
+  - Run before each test
+  - Can be used to setup a fresh variable for each test
 - before(:all)
-- Run once before all the tests run
-- Less time to run
+  - Run once before all the tests run
+  - Less time to run
 - after(:each) and after(:all)
-- Just like their before counterparts but after
+  - Just like their before counterparts but after
 
 ## Generators
 
@@ -521,3 +535,248 @@ What slows down a test suite?
 - before, after
   - save these for special occasions
     - cleaning up data
+
+# Front end testing with phantom.js, capybara, and poltergeist
+
+## Notes about capybara
+
+`match: :first` can be passed to `click_on`
+to click on the first match
+ex
+`click_on "Edit", match: :first`
+
+## Gems
+
+`gem install capybara pltergeist`
+
+## How to
+
+```ruby
+require 'capybara/poltergeist'
+
+Capybara.default_driver = :poltergeist
+
+browser = Capybara.current_session
+browser.visit 'http://rubymonstas.org'
+puts browser.html
+```
+
+If that is in a file called capybara.rb
+Run it with `ruby capybara.rb`
+
+# Feature Tests
+
+## Use Stories
+
+> When I go to the members list, click the link “New member”, fill in the name, and click submit, then I want the member details page for this new member to be shown, with a confirmation message.
+
+Testing that store is called feature testing.
+
+### Detailed example from ruby monstas
+
+Stories:
+
+1. Listing all members: When I go to the members list then I want to see a list of all members, linking to their details page, and links to edit and remove the member.
+2. Showing member details: When I go to the members list, and I click on a member name, then I want the member’s details page to be shown, displaying their name.
+3. Creating a new member: When I go to the members list, click the link “New member”, fill in the name, and click submit, then I want the member details page for this new member to be shown, with a confirmation message.
+4. Editing a member: When I go to the members list, click the “Edit” link for a member, change their name, and click submit, then I want the member details page for this member to be shown, displaying their new name, with a confirmation message.
+5. Removing a member: When I go to the members list, click the “Remove” link for a member, and confirm, then I want the members list to be shown, with the member removed, and a confirmation message.
+
+Test Setup:
+
+```ruby
+#RSpec config file
+require "app"
+require 'capybara/dsl'
+require 'capybara/poltergeist'
+
+Capybara.default_driver = :poltergeist
+Capybara.app = proc { |env| App.new.call(env) }
+
+RSpec.configure do |config|
+  config.include Capybara::DSL
+end
+```
+
+```ruby
+#Story 1 test
+describe App do
+  let(:links) { within('#members') { page.all('a').map(&:text) } }
+
+  it "listing members" do
+    visit "/members"
+    expect(links).to eq ['Anja', 'Edit', 'Remove', 'Maren', 'Edit', 'Remove']
+  end
+```
+
+```ruby
+#Story 2 test
+  it "showing member details" do
+    # go to the members list
+    visit "/members"
+
+    # click on the link
+    click_on "Maren"
+
+    # check the h1 tag
+    expect(page).to have_css 'h1', text: 'Member: Maren'
+
+    # check the name
+    expect(page).to have_content 'Name: Maren'
+  end
+```
+
+```ruby
+#Story 3 test
+  it "creating a new member" do
+    # go to the members list
+    visit "/members"
+
+    # click on the link
+    click_on "New Member"
+
+    # fill in the form
+    fill_in "name", :with => "Monsta"
+
+    # submit the form
+    click_on "Save"
+
+    # check the current path
+    expect(page).to have_current_path "/members/Monsta"
+
+    # check the message
+    expect(page).to have_content 'Successfully saved the new member: Monsta.'
+
+    # check the h1 tag
+    expect(page).to have_css 'h1', text: 'Member: Monsta'
+  end
+```
+
+# Test doubles
+
+"umbrella" term referencing:
+
+1. Mocks: Expectations about method calls, verifying them, and faking returning a value
+2. Stubs: Fake responses to method calls
+3. Fake: Objects with a working implementation that is useful for tests
+4. Dummy: Usually not very relevant in Ruby testing
+5. Spies: Verifying that a stubbed method has been called before
+
+> Mocks and stubs are techniques that are used at the boundaries of the code under test
+
+## Stubs
+
+RSpec has a built-in library called [rspec-mocks](https://www.relishapp.com/rspec/rspec-mocks/docs)
+
+```ruby
+#example stub using rspec-mocks
+RSpec.configure do |config|
+  config.mock_with :rspec # use rspec-mocks
+end
+
+describe App do
+  let(:app)      { App.new }
+
+  before do
+    allow(File).to receive(:read).with("members.txt").and_return("Anja\nMaren\n")
+  end
+
+  context "GET to /members/:name" do
+    let(:response) { get "/members/Anja" }
+
+    it "displays the member's name" do
+      expect(response.body).to have_tag(:p, :text => "Name: Anja")
+    end
+  end
+end
+```
+
+Walkthrough:
+
+1 .In the before block, when RSpec has started executing our code, it replaces the method read with another method that, if it is passed the argument specified (in our case: the filename), will return the return value specified (the string that is our fake file content).
+2 .When it then executes the test, calls our application, and our application calls the method names, it will call this fake (“stubbed”) method File.read? instead of the original, real method that actually reads a file on the harddrive. The fake method will do nothing but return the value we specified: "Anja\nMaren\n"
+3 .So to our application everything looks as if it was talking to the operating system, and looking at actual files on the harddrive, while actually it just calls fake methods that return the fake values we specified. Therefore the application functions just the same, and our tests passs, except it’s not talking to the external system that is our computer at all at this point.
+4 .After the test has run RSpec will then remove these fake methods, so that other tests (in other contexts that do not have this before block) could talk to the original, “real” method File.read again.
+
+## Mocks
+
+Make assertions about methods being called during your tests.
+Similar to stubs, but RSpec actually replaces the original method rather than fake the return value of the method.
+
+Keeps track of how many times it was run and verifies it was called the expected number of times with the expected arguments.
+
+Example
+
+```ruby
+#mocks example
+describe App do
+  let(:app) { App.new }
+
+  context "GET to /members/:name" do
+    let(:response) { get "/members/Anja" }
+
+    it "displays the member's name" do
+      expect(File).to receive(:read).with("members.txt").and_return("Anja\nMaren\n")
+      get "/members"
+    end
+  end
+end
+```
+
+## Spies
+
+Example
+
+```ruby
+describe App do
+  let(:app) { App.new }
+
+  context "GET to /members/:name" do
+    let(:response) { get "/members/Anja" }
+    let(:filename) { "members.txt" }
+    let(:content)  { "Anja\nMaren\n" }
+
+    before { allow(File).to receive(:read).with(filename).and_return(content) }
+
+    it "displays the member's name" do
+      get "/members"
+      expect(File).to have_received(:read).with(filename)
+    end
+  end
+end
+```
+
+## Summary:
+
+- Stubbing and mocking methods replaces the original methods temporarily.
+- Stubbing a method replaces it in order to fake it, and allow it to be called without executing the original, “real” method. This can be useful if we want our tests to not talk to external systems or code we do not want to test at the moment.
+- Mocking a method asserts that the method actually is being called during our tests.
+- Spying on a method (in RSpec) means verifying that a stubbed method has been called after the fact.
+
+## Double Objects
+
+Entire fake objects, not just fake methods and/or fake return values from methods
+Example
+
+```ruby
+describe Person do
+  let(:person) { Person.new("Anja") }
+  let(:friend) { double(name: "Carla") }
+
+  describe "greet" do
+    it "returns a greeting" do
+      expect(person.greet(friend)).to eq "Hi Carla! My name is Anja."
+    end
+  end
+end
+```
+
+## When to use doubles?
+
+- If you need the results of calling an api
+  - or any external system
+    - waiting on a response can be slow
+    - can't work offline
+- Be careful that you are fully testing your code and not ignoring something with a double
+
+Check out this talk: [Katrina Owen - 467 tests, 0 failures, 0 confidence - Railsberry 2013](https://vimeo.com/68730418)

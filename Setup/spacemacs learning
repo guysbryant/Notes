@@ -1,0 +1,56 @@
+Files = f
+f = find files = fuzzy finder
+- shows folders as folders
+s = save
+
+Dired
+- emacs package for moving through files/folders
+
+zf = zoom frame = zooming
+ - q to quit
+
+
+Major Mode
+ - custom commands based on file type
+
+Mini Buffer
+- sits under the spac line
+- display what its doing
+
+
+Menu Navigation
+C-j/k || C-n/p
+
+Project = p
+f = find files in project
+- no folders
+- fuzzy finding only
+t = neotree
+
+Window management = w
+h,l = left, right
+-,/ = split horizontal, vertical
+s = split below
+d = delete/close window
+m = maximize
+0..9 = go to pane by number
+
+
+Code Navigation
+ji = tag search
+- type the name of a method to go to it 
+* when on a symbol, variable, method
+- highlight all instances 
+ - navigate with n/N
+- / search entire project for it
+NOTE: space * does a search with input aka with whatever was under the cursor
+ - space / lets you type what you want to search for 
+
+
+Searching
+-Uses grep by default but uses others if they are present on your system
+
+Buffer = b
+b - mini buffer
+- shows all other open buffers
+tab = switch to most recent buffer

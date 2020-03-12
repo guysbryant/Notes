@@ -1,0 +1,139 @@
+Commands to remember:
+:b = buffer
+- swithc to any open file
+:ls, :files, :buffers
+- list all open buffers (files)
+ - only works with files opened using vim commands from vim
+  - ie, won't show any openend file form another tab, window, and/or tmux pane
+:find
+- find and open a file
+ - keeps the file in memory as a buffer
+:edit, :e
+ - opens a file to edit
+ - creates a file if it doesn't exist
+
+Split management:
+c-w _ max height
+c-w | max width
+c-w = max normalize
+c-w r swap top/bottom || left/right
+c-w t break out into a new tab
+c-w o close all others
+
+Autocomplete
+c-p brings up a list of options
+ - navigate list with c-p and c-n
+ - just start typing when you have selected what you want to insert from the menu
+ - a-e to cancel
+c-x c-l for whole line completion
+c-c c-o sytax aware omnicompletion
+
+Ctags
+- Use brew install ctags to install
+
+
+Fuzzy Finding files
+- with set path+=** set in vimrc
+ - :find <file> will find the file recursively
+ - :find *<file> will use a wildcard matcher
+ - with set wildmneu 
+  - hitting tab from the :find command will bring up a horizontal menu you can tab through
+   - actual fuzzy finding
+
+Getting help
+:help <whatever you want help with>
+- :help splits
+- :help :ls
+
+Concepts:
+- buffers
+ - :ls command
+  - %a is current buffer
+  - + means unsaved changes
+  - :new, and :edit can make new buffers
+   - :new can take a name
+
+
+
+Getting the most out of vim without plugins.
+
+Features:
+- Fuzzy File Search
+- Tag jumping
+- Autocomplete
+- File Browsing
+- Snippets
+- Build Integration 
+
+
+Basic Setup:
+
+	set nocompatible
+		- breaks compatibility with vi
+		- adds more common functionaltiy
+
+	sytax enable
+		- enable sytax and plugins (for netrw)
+	filetype plugin on
+
+Finding Files:
+
+	set path+=**
+		- Search down into subfolders
+		- Provides tab-completion for all file-related tasks
+
+	set wildmenu
+		- Display all matching files when we tab complete
+	With these two options we can:
+		- use tab to :find by partial match
+		- use * to make it fuzzy
+	Consider:
+		- :b lets you autocomplete to  any open buffer
+
+Tag Jumping:
+command! MakeTags !ctags -R .
+ - adding this to vimrc will cause the command MakeTags to be run by the terminal
+  - -R means recursive 
+  - . means current directory
+ Now we can:
+  - c-] jumpt to tag under cursor
+  - gc-] for ambiguous tags
+  - c-t jump back up the tag stack
+  - NOTE: no visual tags list 
+
+Autocomplete:
+
+- Highlights:
+ - will read from current file and tags file
+ - c-x c-n for just this file
+ - c-x c-f for filenames (works with the set path+=** trick)
+ - c-x c-] for tags only
+ - c-n anything specified by the complete option
+
+Now we can:
+ - use c-n/c-p to go back and forth between suggestion list
+
+File Browsing
+
+- Tweaks
+let g:netrw_banner=0 removes banner
+let g:netrw_browse_split=4 Open in prior window
+let g:netrw_altv=1 open splits to the right
+let g:netrw_liststyle=3 tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+- Now we can:
+ - :edit a folder to open a file browser
+ - c-v/c-t to open in an h-split/v-split/tab
+ - check |netrw-browse-maps| for more mappings
+
+
+Build Integration
+set makeprg=bundle\ exec\ rspec -f\ QuickfixFormatter
+
+- Now we can:
+ - run :make to run RSpec
+ - :cl to list errors
+ - :cc# to jump to error by number
+ - :cn and :cp to navigate forward and back

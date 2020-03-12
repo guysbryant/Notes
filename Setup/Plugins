@@ -1,0 +1,34 @@
+Prettier
+- style formatter
+coc
+- auto complete
+- method jump
+- method definiitons
+- custom snippets
+- requires language servers for each language
+Nerdtree
+- file tree
+- nerdtree plugins
+ - devicons
+ - git
+ - syntax 
+Fuzzy file finder
+ - suggestions:
+  - fzf
+  - NOT ctrlp
+   - except maybe if we configure it to use ripgrep
+  - Yggdroot/LeaderF
+  - I wonder if the no plugin ctags and set path+=** is good enough
+Nerdcommenter
+Gutter
+comentary
+rainbow 
+ - color coded brackets
+youcompleteme 
+ - autocomplete intellisense
+auto-pairs
+ - add closing brackets
+vim which key and vim leader guide
+ - pop up keybindings
+
+

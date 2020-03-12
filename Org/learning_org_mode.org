@@ -1,0 +1,88 @@
+#+title: Discovering Org Mode
+
+* Notes
+** Useful VIM stuff I learned during this
+
+*** surround commands
+
+**** activated from normal mode with ys<textobject>
+
+***** a = around
+
+***** i = inside
+
+** Useful Spacemacs stuff I learned during this
+
+*** snippets (yas - whatever that is)
+
+**** SPC i s
+
+**** M-m from insert mode enables Which Key
+
+* Today's Schedule
+* Org Concepts
+** trees/subtrees
+*** [0/1]Lists
+    - [X] item 1
+      [ ] won't work
+    - item 2
+    - item 3
+      1. ordered
+      2. second thing
+      3. next thing
+         - now this has some things
+         - doesn't matter what order though
+      4. this is the next one
+      5. we resumed dude
+      6. lets make some check list items now
+      7. [X] first thing here not tracked
+      8. [X] second thing here not me either
+**** checkboxes need to be in a list
+***** un/ordered doesn't matter which
+****** their parent heading can track them
+******* as long as they aren't nested under something else
+******** ...like another list item
+
+*** Just basic markdown style
+**** The number of * determine the heading level
+*** C-RET creates a sibling node
+***** Puts you in insert mode if in normal
+*** TAB/S-TAB cycles heading level
+*** s = subtree commands
+**** n = narrow (focus on just this one node and its children)
+**** N = widen (see everything again)
+*** Evil Mode
+**** v a e = around element
+**** v i e = inside element
+*** Code Blocks
+ #+begin_src ruby
+   def org_mode_ruby(text)
+     text
+   end
+   org_mode_ruby("this is pretty great")
+ #+end_src
+
+ #+RESULTS:
+ : this is pretty great
+*** Todos
+**** Learning tasks
+***** Org mode
+***** TODO rpsec in spacemacs
+***** DONE Make lists
+      CLOSED: [2020-03-12 Thu 07:54]
+***** TODO Make todos
+****** Cycle through todo types
+******* SPC T T
+******* S-arrow keys
+****** REMEMBER that this is VIM and the dot is powerful!
+* Scheduling todos with the agenda
+** , d = dates menu options
+*** d = deadline / s = schedule
+**** S-arrow keys to navigate the date picker
+***** time must be entered in special format
+****** 14:00+2 sets the time as 2pm and it takes 2 hours
+******* 2pm - 4pm
+******** DONE Schedule this
+         CLOSED: [2020-03-12 Thu 08:41] SCHEDULED: <2020-03-12 Thu 11:00-11:30>
+******* The length of time for the task must be in hours but can be updated after
+******** S-arrow keys up/down to change any part of the date

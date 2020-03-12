@@ -1,0 +1,31 @@
+tmux to start
+resize with M-[arrow keys] || mouse
+
+s - Lists all sessions and lets you pick one to switch to
+z - full screen(full window really) for current pane
+? - List all keys/options
+
+Layout switching:
+M-{
+ 1: even-horizontal,
+ 2: even-vertical,
+ 3: main-horizontal,
+ 4: main-vertical,
+ 5: tiled
+}
+
+
+See ~/.tmux.conf for my customizations
+
+Notably:
+- VIM style pane switching with C[h,j,k,l]
+- C-a replaces C-b as leader
+- splits (all start with leader):
+	- by default tmux creates a new split using the directory you started the tmux session from
+		- - for horizontal
+		- = for vertical
+	- using M (this is alt/option) and the split keys, I can create a split using the current directory of the pane I split from 
+- new window
+	- 
+- leader r
+	- loads tmux config changes into a currently running tmux session

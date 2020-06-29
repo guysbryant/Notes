@@ -1,0 +1,3 @@
+Usage:
+	grep [search string] [file]
+	[output stream] | grep [search string]

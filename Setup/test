@@ -1,0 +1,12 @@
+new test
+Scenario: paint a wall blue
+  Given I have some paint
+  And I have a white wall
+  When I paint the wall blue
+  Then I should see "success"
+
+Scenario: paint a wall red
+ Given I have some paint
+ And I have a white wall
+ When I paint the wall red
+ Then I should see "success"

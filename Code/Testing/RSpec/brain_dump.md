@@ -581,3 +581,15 @@ Examples:
           - can't work offline
       - Be careful that you are fully testing your code and not ignoring something with a double
       Check out this talk: [[https://vimeo.com/68730418][Katrina Owen - 467 tests, 0 failures, 0 confidence - Railsberry 2013]]
+
+  #+begin_src ruby
+    describe "An example of the error Matchers" do
+      it "should show how the error Matchers work" do
+
+          # The following Expectations will all pass
+          expect { 1/0 }.to raise_error(ZeroDivisionError)
+          expect { 1/0 }.to raise_error("divided by 0")
+          expect { 1/0 }.to raise_error("divided by 0", ZeroDivisionError)
+      end
+    end
+#+end_src

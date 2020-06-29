@@ -1,0 +1,121 @@
+*#+title: Learning Microsoft Access
+
+* Access vs Excel
+** Access
+*** Great at: Relational Data
+**** Multiple tables with related information
+** Excel
+*** Great at: Analyzing flat structure data
+** Not Interchangeable
+* Learning Strategies
+** Play with other people's databases
+*** Microsoft sample databases:
+**** https://support.microsoft.com/en-us/office/featured-access-templates-e14f25e4-78b6-41de-8278-1afcfc91a9cb?ui=en-us&rs=en-us&ad=us
+***** [[http://office.microsoft.com/en-us/templates/results.aspx?qu=database#ai:TC001228997%7C][Northwinds Database is widely known]]
+** Tutorial Series
+*** [[http://www.utteraccess.com/uploads/Crystal/][Crystal's Access Basics]]
+*** [[http://access.mvps.org/access/tencommandments.htm][Ten Commandments of Access]]
+**** Print these and display where you will see them whenever working with Access
+**** Breaking any of these is a recipe for failure
+** Video Tutorials
+*** [[https://www.youtube.com/playlist?list=PLhKFRV3-UgpeA_3wzRHF8AS8T7ppKvm9O][MS Access 2013 Beginner Level 1]]
+*** [[https://www.youtube.com/watch?v=_i66z0Ks66k&list=PL1B2705CCB40CA4CA][Learn Access by Crystal]]
+*** [[https://support.microsoft.com/en-us/office/access-video-training-a5ffb1ef-4cc4-4d79-a862-e2dda6ef38e6?ui=en-us&rs=en-us&ad=us][Access Video Training (By Microsoft)]]
+* Basic Steps to Create a Database
+** 1. Planning phase of carefully reviewing the database design
+*** Proceed Carefully
+**** Follow a naming convention
+**** Get the table structures and relationships correct
+*** Poor planning will result in an inflexible database that doesn't adapt to changes
+*** Articles to guide through the planning process:
+**** [[http://www.rogersaccesslibrary.com/forum/topic238.html][Roger's Access blog: Detailed explanation of "Normalizing the data"]]
+**** [[http://www.gpcdata.com/downloads/normalizationgpgonaccess.pdf][Data Modeling]]
+**** [[http://www.utteraccess.com/forum/Autonumbers-Not-t443604.html][Autonumbers (primary keys)]]
+**** [[http://www.utteraccess.com/forum/ACCGeneral-Initial-Planni-t290041.html][Glen Loyd: Planning Guide Part 1]]
+**** [[http://www.utteraccess.com/forum/ACCGeneral-Initial-Planni-t290041.html ][Glen Loyd: Planning Guide Part 2]]
+** 2. Add common tables, modules, and classes
+*** Called a shell database
+*** Examples:
+**** [[http://allenbrowne.com/ser-23a.html][Error Tracking]]
+**** Message Box Generation
+***** From an article: "I copied a technique from the Northwinds database to simplify generating message boxes. I wouldn't really bother with this in the beginning."
+**** [[http://access.mvps.org/access/api/api0008.htm][Current User]]
+**** [[http://allenbrowne.com/ser-42.html][ELookup]]
+***** Replaces DLookup
+**** etc...
+***** Anything you find that you frequently need.
+** 3. Populate reference tables
+*** These are tables that house repetitive information that are created to avoid sotring duplicate information.
+**** Example: All 50 US States.
+** 4. Add Forms for data Entry
+*** Three Common Form Types
+**** Details
+***** Display details for an entry
+***** Main hub to edit details for a piece of information
+****** ie: Personal data cards for contacts
+***** [[https://imgur.com/5GGOAAz][Example 1]]
+***** [[https://imgur.com/FwZ9nSe][Example 2]]
+**** Split Sheet
+***** Display, search, filter data
+***** "Looks and feels" like a spreadsheet
+****** Users can't directly interact with tables
+******* Commandment 1
+****** Clicking on entries opens detail form for that record
+***** [[https://imgur.com/BFZnPmC][Example]]
+**** Dialog
+***** Provides clickable links to navigate various forms/reports of the database
+****** ie: dashboards that load on opening or dialog boxes to print customized reports
+***** [[https://imgur.com/dEoECaj][Example 1]]
+***** [[https://imgur.com/NZKZW9P][Example 2]]
+*** Use the Form Wizard in the beginning but you will find it easier to make your own as you learn more and get comfortable with Access.
+**** [[https://www.youtube.com/watch?v=R3WHo7DAOg0][Video about form creation]]
+** 5. Add Reports
+*** Two broad categories
+**** Individual
+***** Print specific record
+**** Group
+***** Print out big summaries
+** 6. Customize
+*** Some ideas
+**** Link things to Excel for data analysis and graphing data.
+**** Email automation
+**** Use addresses to print labels/envelopes
+**** Logon form
+* Primary Keys
+** Use Auto-Numbers
+** Users should never interact with primary keys to prevent accidental changes
+* Naming Conventions
+** Anything logical and consistent is fine
+** One technique is to use a short prefix with an underscore followed by a logical name:
+*** Tables would be: tbl_People or tblPeople
+*** Queries would be: qry_MemberDetails or qryMemberDetails
+*** Use descriptive field names, be a specific as you can, characters are cheap
+**** Instead of FirstName, use ClientFirstName or EmployeeFirstName
+* Split Databases
+** Standard Practice
+** [[http://www.utteraccess.com/forum/Sharing-Access-Database-t1264601.html][Article]]
+* Front End Distribution
+** Article: [[https://www.devhut.net/2015/06/30/ms-access-deploying-your-database-front-end-to-your-users/][Deploying and Updating Front End Database Applications]]
+* Queries
+** Filter data so you only see what you are interested in
+** [[https://support.microsoft.com/en-us/office/introduction-to-queries-a9739a09-d3ff-4f36-8ac3-5760249fb65c?ocmsassetid=ha010209892&correlationid=e7ba0aa8-46ce-4b08-b1f3-567e42d9341a&ui=en-us&rs=en-us&ad=us][Article]]
+* Many to Many Relationships
+** [[https://support.airtable.com/hc/en-us/articles/218734758-A-beginner-s-guide-to-many-to-many-relationships][Article]]
+* Cascading Combo Boxes
+** Each selection affects the following choices
+** [[https://www.youtube.com/watch?v=WFSvnT9LHn0][Video]]
+* Helpful Websites
+** [[http://access.mvps.org/access/toc.htm][Access MVPs]]
+*** Code examples
+** [[https://www.techonthenet.com/access/index.php][Tech on the Net]]
+*** Functions listing with examples
+** [[http://www.allenbrowne.com/tips.html][Allen Browne]]
+*** Is an Access Wizard
+** [[http://www.utteraccess.com/forum/index.php?app=portal][Utter Access]]
+*** Forum
+** [[https://www.msaccesstips.com/][MSAccessTips]]
+*** Blog with helpful examples
+** [[http://599cd.com/blog/display-article.asp?ID=1082&][599cd]]
+*** Paid videos
+** [[http://www.databasedev.co.uk/downloads.html][Database Developers]]
+*** Demonstrations of high level techniques

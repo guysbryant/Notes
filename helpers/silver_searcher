@@ -4,5 +4,7 @@ Like ack but faster and can be told to use .gitignore and .hgignore ontop of .ig
 	- Suggested to add *.min.js to .ignore
 Usage:
 	ag todo
+	ag [string to search for] [file]
+	[output stream] | ag [string to search for]
 Result:
 	Find every file that contains the word todo

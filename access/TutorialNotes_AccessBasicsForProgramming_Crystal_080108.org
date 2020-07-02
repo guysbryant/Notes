@@ -1,0 +1,21 @@
+#+title: Access Basics for Programming by Crystal -- Jan 08, 2008
+
+
+* 0. Key Terms
+** VBA
+* 1. Types of Applications
+  Databases are just one type of application. They hold records with fields in them and must be thoughtfully designed from the beginning.
+* 2. Database Objects
+** Tables
+   rows/records and columns/fields
+** Queries
+** Forms
+** Reports
+** Macros
+** Modules
+* 3. Normalizing Data
+* 4. Relationships, Referential Integrity, Indexes
+* 5. Form and Report Design
+* 6. SQL Syntax
+* 7. Delimiters
+* 8. Where to Get More Help

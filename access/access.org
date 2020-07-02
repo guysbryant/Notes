@@ -1,4 +1,4 @@
-*#+title: Learning Microsoft Access
+#+title: Learning Microsoft Access
 
 * Access vs Excel
 ** Access
@@ -14,6 +14,7 @@
 ***** [[http://office.microsoft.com/en-us/templates/results.aspx?qu=database#ai:TC001228997%7C][Northwinds Database is widely known]]
 ** Tutorial Series
 *** [[http://www.utteraccess.com/uploads/Crystal/][Crystal's Access Basics]]
+**** [[/Users/guysbryant/Documents/Notes/access/TutorialNotes_AccessBasicsForProgramming_Crystal_080108.org][My Notes]]
 *** [[http://access.mvps.org/access/tencommandments.htm][Ten Commandments of Access]]
 **** Print these and display where you will see them whenever working with Access
 **** Breaking any of these is a recipe for failure

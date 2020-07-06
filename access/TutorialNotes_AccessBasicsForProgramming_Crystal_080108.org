@@ -3,12 +3,40 @@
 
 * 0. Key Terms
 ** VBA
+** Reserved Words
+*** Type
+** View
+** index
+** RecordSource
+** RowSource
+** QBE (Query-By-Example)
+** Normalization
 * 1. Types of Applications
   Databases are just one type of application. They hold records with fields in them and must be thoughtfully designed from the beginning.
 * 2. Database Objects
 ** Tables
    rows/records and columns/fields
+   index definitions
+   basis of all other DB objects
+   resident or linked to other sources
+   Datasheet view is default when opening a table
+   connected together through relationship
 ** Queries
+*** Main types
+**** SELECT
+    Can be used to SELECT information aka filter and sort.
+   Show information from one or more tables as records and fields.
+   Used as a RecordSource in forms and reports or RowSource in combo or listboxes.
+**** Delete
+    Get rid of data
+**** Update
+    Modify records
+**** Append
+    Add records
+**** Make Tables
+***  SQL
+    Statements defining a Query are stored using SQL.
+    Many can be displayed graphically on the QBE (Query-By-Example) grid in Design View
 ** Forms
 ** Reports
 ** Macros

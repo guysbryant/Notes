@@ -1,0 +1,27 @@
+form_for will automatically add error div if the object has any errors.
+Must be rendered because errors do not persist through redirects.
+
+Add this to layouts/_errors.html.erb
+
+<% if @object.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@object.errors.count, "error") %> prohibited this from being saved:</h2>
+
+    <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+Then add this to any template you want to display errors messages
+<%= render partial: "layouts/errors", locals {object: @object} %>
+Change the @object to whatever your object is
+
+Example css for errors 
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}

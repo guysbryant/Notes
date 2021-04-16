@@ -1,0 +1,67 @@
+Validation triggers:
+create
+create!
+save
+save!
+update
+update!
+
+Validations
+
+validates :check_box_is_checked, acceptance: true 
+validates :check_box_is_checked, acceptance: {message: 'yes'} 
+validates :check_box_is_checked, acceptance: {accept: ['TRUE', 'accepted']} 
+
+validates_associated :has_many_or_belongs_to_relationship
+
+validates :email, confirmation: true
+<%= text_field :person, :email %>
+<%= text_field :person, :email_confirmation %>
+validates :email_confirmation, presence: true 
+
+validates :email, confirmaiton: { case_sensitive: false}
+
+validates :subdomain, exclusion: { in: %w(www us ca jp), message: "%{value} is reserved." }
+
+validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+validates :legacy_code, format: { without: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+
+validates :size, inclusion: { in: %w(small medium large), message: "%{value} is not a valid size" }
+
+validates :name, length: { minium: 2, too_short: "%{count} characters is the minimum allowed" }
+validates :name, length: { maximum: 20, too_long: "%{count} characters is the maximum allowed" }
+validates :name, length: { in: 6..20, wrong_length: "%{count} characters is the wrong length" }
+validates :name, length: { is: 6, wrong_length: "%{count} characters is the wrong length" }
+
+validates :points, numericality: true
+validates :games_played, numericality: { only_integer: true }
+  Also accepts:
+    greater_than:
+    greater_than_or_equal_to:
+    equal_to:
+    less_than:
+    less_than_or_equal_to:
+    other_than:
+    odd:
+    even:
+
+validates :name, presence: true
+validates :name, absence: true
+
+validates :boolean_field_name, inclusion: [true, false]
+validates :boolean_field_name, exclusion: [nil]
+
+validates :uniqueness: true 
+validates :uniqueness: { case_sensitive: false } 
+validates :uniqueness: { scope: :year, message: "should happen once per year" }
+
+validates_with GoodnessValidator 
+  passes the record to a separate class for validation 
+  class GoodnessValidator < ActiveModel::Validator
+    def validate(record)
+      if record.first_name == "Evil"
+        record.errors.add :base, "This person is evil"
+      end
+    end
+  end
+    [:base] refers to the object as a whole, use [:attribute] to add errors to an attribute

@@ -1,0 +1,12 @@
+See: 
+https://ruby-doc.org/core-2.5.1/doc/syntax/literals_rdoc.html
+
+%i = array of symbols
+%q string
+%r regex
+%s symbol 
+%w array of strings
+%x backtick
+
+%i(things go here)
+  => [things, go, here]

@@ -1,0 +1,9 @@
+<form action="/shoes"  method="post">
+    <input type="hidden"  name="authenticity_token"  value="<%= form_authenticity_token %>">
+
+    <label>Brand:</label>
+    <input type="text"  name="shoe[brand]" >
+
+    <input type="submit"  value="Create Shoe" >
+</form>
+
